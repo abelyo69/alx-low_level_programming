@@ -1,28 +1,27 @@
 #include "holberton.h"
-#include <stdio.h>
 
 /**
-  * _strcat - Concatenates two strings
-  * @dest: The destination string
-  * @src: The source string
-  *
-  * Return: A pointer to the resulting string dest
-  */
-char *_strcat(char *dest, char *src)
+ * _strncpy - cpoies n bytes of src to the dest string
+ * @dest: string to copy to
+ * @src: string being copied
+ * @n: largest number of bytes to copy
+ *
+ * Return: address of dest
+ */
+char *_strncpy(char *dest, char *src, int n)
 {
-	int dlen = 0, i;
+	int i;
 
-	while (dest[dlen])
+	i = 0;
+	while (i < n && *(src + i))
 	{
-		dlen++;
+		*(dest + i) = *(src + i);
+		i++;
 	}
-
-	for (i = 0; src[i] != 0; i++)
+	while (i < n)
 	{
-		dest[dlen] = src[i];
-		dlen++;
+		*(dest + i) = '\0';
+		i++;
 	}
-
-	dest[dlen] = '\0';
 	return (dest);
 }

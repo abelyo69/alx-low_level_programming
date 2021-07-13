@@ -1,45 +1,39 @@
 #include "holberton.h"
+#include <stdio.h>
 #include <stdlib.h>
 
 /**
- * argstostr - Concatenates all arguments of the program into a string;
- *             arguments are separated by a new line in the string.
- * @ac: The number of arguments passed to the program.
- * @av: An array of pointers to the arguments.
- *
- * Return: If ac == 0, av == NULL, or the function fails - NULL.
- *         Otherwise - a pointer to the new string.
- */
+  * argstostr - fills memory with a constant byte
+  * @ac: is the size of the pointer
+  * @av: is a letter
+  * Return: an address
+  */
+
 char *argstostr(int ac, char **av)
 {
-	char *str;
-	int arg, byte, index, size = ac;
+	char *conca;
+	int i, j, cont = 0, k = 0;
 
 	if (ac == 0 || av == NULL)
 		return (NULL);
 
-	for (arg = 0; arg < ac; arg++)
+	for (i = 0; i < ac; i++)
 	{
-		for (byte = 0; av[arg][byte]; byte++)
-			size++;
+		for (j = 0; av[i][j] != '\0'; j++)
+			cont++;
 	}
 
-	str = malloc(sizeof(char) * size + 1);
-
-	if (str == NULL)
+	conca = malloc(cont * sizeof(char) + ac + 1);
+	if (!conca)
 		return (NULL);
 
-	index = 0;
-
-	for (arg = 0; arg < ac; arg++)
+	for (i = 0; i < ac; i++)
 	{
-		for (byte = 0; av[arg][byte]; byte++)
-			str[index++] = av[arg][byte];
-
-		str[index++] = '\n';
+		for (j = 0; av[i][j] != '\0'; j++, k++)
+			conca[k] = av[i][j];
+		conca[k] = '\n';
+		k++;
 	}
-
-	str[size] = '\0';
-
-	return (str);
+	conca[k] = '\0';
+	return (conca);
 }
